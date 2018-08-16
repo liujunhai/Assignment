@@ -346,11 +346,11 @@ bool CheckP(string plate)
 bool GenerDiaRate(vector<int> quality, vector<int> dcomp, int pro_index, int mech_index)
 {
     // compute the potential failure rate of diagnosing for this mechanic
-    double df = quality[mech_index] * 0.01 * (1 - dcomp[pro_index - 1] * 0.01);
-
+    double df = quality[mech_index] * 0.01 * 0.7 +  (1 - dcomp[pro_index - 1] * 0.01) * 0.3;
+    cout << "df: " << df << endl;
     // randomly generate the success rate of diagnosing for this mechanic
     double dp = (rand()%100) * 0.01;
-
+    cout << "dp: " << dp << endl;
     // make evaluation
     if(dp <= df)
     {
@@ -368,11 +368,11 @@ bool GenerDiaRate(vector<int> quality, vector<int> dcomp, int pro_index, int mec
 bool GenerTreRate(vector<int> quality, vector<int> tcomp, int pro_index, int mech_index)
 {
     // compute the potential failure rate of treatment for this mechanic
-    double tf = quality[mech_index] * 0.01 * (1 - tcomp[pro_index - 1] * 0.01);
-
+    double tf = quality[mech_index] * 0.01 * 0.6 + (1 - tcomp[pro_index - 1] * 0.01) * 0.4;
+    cout << "tf: " << tf << endl;
     // randomly generate the success rate of treatment for this mechanic
     double tp = (rand()%100) * 0.01;
-
+cout << "tp: " << tp << endl;
     if(tp <= tf)
     {
         bool result = true;
@@ -425,11 +425,11 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
         {
             cout << "   Maybe the guess is correct, the problem can be fixed quickly." << endl;
             // compute the potential failure rate of treatment for this mechanic (right guessing)
-            double tt = quality[mech_index] * 0.01 * (1- tcomp[pro_index - 1] * 0.01);
-
+            double tt = quality[mech_index] * 0.01 * 0.6 + (1- tcomp[pro_index - 1] * 0.01) * 0.4;
+            cout << "tt: " << tt << endl;
             // randomly generate the success rate of treatment for this mechanic
             double tp = (rand()%100) * 0.01;
-
+            cout << "tp: " << tp << endl;
             if(tp <= tt)
             {
                 cout << "2) Repair complete √, you can retrieve your car." << endl;
@@ -444,11 +444,11 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
         }else
         {
             // compute the potential failure rate of treatment for this mechanic
-            double tt = quality[mech_index] * 0.01 * (1- tcomp[pro_index - 1] * 0.01) * 0.25;
-
+            double tt = quality[mech_index] * 0.01 * 0.6 + (1- tcomp[pro_index - 1] * 0.01) * 0.4 * 0.25;
+            cout << "tt: " << tt << endl;
             // randomly generate the success rate of treatment for this mechanic
             double tp = (rand()%100) * 0.01;
-
+            cout << "tp: " << tp << endl;
             if(tp <= tt)
             {
                 cout << "2) Repair complete √, you can retrieve your car." << endl;
