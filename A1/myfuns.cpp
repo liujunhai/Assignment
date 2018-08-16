@@ -29,12 +29,12 @@ int ReadVehicles(std::vector<std::string> &col11, std::vector<std::string> &col1
     }
     if(file.bad())
     {
-        std::cerr << "hardware failure" << std::endl;
+        std::cerr << "hardware failure!" << std::endl;
         return -2;
     }
     if(file.eof() && line =="")
     {
-        std::cerr << "line not found" << std::endl;
+        std::cerr << "line not found!" << std::endl;
         return -3;
     }
 
@@ -412,15 +412,15 @@ void dandf(std::vector<int> quality, std::vector<int> tcomp, std::vector<std::st
             std::cout << "******************************************************" << std::endl;
         }else
         {
-            fix_achieve = "Fail";
+            fix_achieve = "Failed";
 
-            std::cout << "2) Repair fail X, you need to retrieve your car." << std::endl;
+            std::cout << "2) Repair failed X, you need to retrieve your car." << std::endl;
             std::cout << "   Moving to the next car, and restart the whole process." << std::endl;
             std::cout << "******************************************************" << std::endl;
         }
     }else
     {
-        std::cout << "1) Dignose fail X, start guessing the possible problem." << std::endl;
+        std::cout << "1) Dignose failed X, start guessing the possible problem." << std::endl;
         std::cout << "   ==================================================>" << std::endl;
 
         int num_pro = pname.size(); // generate the length of problem list
@@ -457,9 +457,9 @@ void dandf(std::vector<int> quality, std::vector<int> tcomp, std::vector<std::st
                 std::cout << "******************************************************" << std::endl;
             }else
             {
-                std::cout << "2) Repair fail X, you need to retrieve your car." << std::endl;
+                std::cout << "2) Repair failed X, you need to retrieve your car." << std::endl;
 
-                fix_achieve = "Fail";
+                fix_achieve = "Failed";
 
                 std::cout << "   Moving to the next car, and restart the whole process." << std::endl;
                 std::cout << "******************************************************" << std::endl;
@@ -482,9 +482,9 @@ void dandf(std::vector<int> quality, std::vector<int> tcomp, std::vector<std::st
                 std::cout << "******************************************************" << std::endl;
             }else
             {
-                std::cout << "2) Repair fail X, you need to retrieve your car." << std::endl;
+                std::cout << "2) Repair failed X, you need to retrieve your car." << std::endl;
 
-                fix_achieve = "Fail";
+                fix_achieve = "Failed";
 
                 std::cout << "   Moving to the next car, and restart the whole process." << std::endl;
                 std::cout << "******************************************************" << std::endl;
