@@ -515,7 +515,8 @@ int Write(std::ostringstream &summary, std::string filename5)
     {
         output << summary.str();
         std::cout << "   Repair report has been written to " << filename5 << " successfully." << std::endl;
+        output.close();
     }
-    output.close();
+
     return 0;
 }
