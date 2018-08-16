@@ -9,40 +9,40 @@
 #include <algorithm>
 #include <cctype>
 #include <sstream>
-using namespace std;
+
 
 int main(int argc, char* argv[])
 {
     srand (unsigned(time(NULL))); // initialize random seed;
 /* ***************************** File 1 ************************/
-    vector<string> car, color, plate;
-    vector<int> problem;
+    std::vector<std::string> car, color, plate;
+    std::vector<int> problem;
 
-    string file_name1 = argv[2];
+    std::string file_name1 = argv[2];
 
     ReadVehicles(car, color, plate, problem, file_name1, CheckP); // retrieve all columns in Vehicles.txt
 /* **************************** File 2 *************************/
-    vector<string> name, gender;
-    vector<int> quality;
+    std::vector<std::string> name, gender;
+    std::vector<int> quality;
 
-    string file_name2 = argv[3];
+    std::string file_name2 = argv[3];
     ReadMechanics(name, gender, quality, file_name2, CheckM); // retrieve all columns in Mechanics.txt
 /* **************************** File 3 **************************/
-    vector<string> pname;
-    vector<int> dcomp, tcomp, tindex;
+    std::vector<std::string> pname;
+    std::vector<int> dcomp, tcomp, tindex;
 
-    string file_name3 = argv[4];
+    std::string file_name3 = argv[4];
     ReadProblems(pname, dcomp, tcomp, tindex, file_name3); // retrieve all columns in Problems.txt
 /* **************************** File 4 **************************/
-    vector<string> ttmt;
+    std::vector<std::string> ttmt;
 
-    string file_name4 = argv[5];
+    std::string file_name4 = argv[5];
     ReadFixes(ttmt, file_name4); // retrieve fix method from Fixes.txt
 /* **************** Diagnose and treatment procedure *************/
-    ostringstream summary; // A string stream to contain the whole summary
+    std::ostringstream summary; // A string stream to contain the whole summary
 
-    string number = argv[1];
-    int inumber = stoi(number);
+    std::string number = argv[1];
+    int inumber = std::stoi(number);
     int num_mech = name.size(); // get the total number of mechanics
     if(inumber >= car.size())
         inumber = car.size();
@@ -53,16 +53,16 @@ int main(int argc, char* argv[])
 
         int pro_index = problem[i]; // get the index of the current vehicle to index Problems.txt
 
-        cout << "   The current mechanic is: [" << name[mech_index] << ", " << gender[mech_index] << "] and the " << i + 1<< ".vehicle is coming in now." <<endl;
+        std::cout << "   The current mechanic is: [" << name[mech_index] << ", " << gender[mech_index] << "] and the " << i + 1<< ".vehicle is coming in now." <<std::endl;
 
         // strings contain mechanics' information
-        string mech = name[mech_index];
-        string gen = gender[mech_index];
+        std::string mech = name[mech_index];
+        std::string gen = gender[mech_index];
 
-        cout << "   The vehicle is: [" << car[i] << ", " << color[i] << ", " << plate[i] << "]. Start to diagnose. Please wait..." << endl;
+        std::cout << "   The vehicle is: [" << car[i] << ", " << color[i] << ", " << plate[i] << "]. Start to diagnose. Please wait..." << std::endl;
 
         // string contains actual problem
-        string actual_prob = pname[pro_index - 1];
+        std::string actual_prob = pname[pro_index - 1];
 
         // generate the result of diagnosing(true = Successful detect/ flase = fail detect)
         bool diagnosis = GenerDiaRate(quality, dcomp, pro_index, mech_index);
@@ -70,26 +70,29 @@ int main(int argc, char* argv[])
         // generate the result of treatment(true = Successful fix/ flase = fail fix)
         bool treatment = GenerTreRate(quality, tcomp, pro_index, mech_index);
 
-        string dia_prob, fix_apply, fix_achieve; // strings contain diagnose and fix information
+        std::string dia_prob, fix_apply, fix_achieve; // strings contain diagnose and fix information
 
+        // output the diagnosing and fixing details to standard out
         dandf(quality, tcomp, pname, ttmt, tindex, pro_index, mech_index, diagnosis, treatment, dia_prob, fix_apply, fix_achieve);
 
         // Writing into string streams
-        string veh_info = "Vehicle: " + car[i] + ", " + color[i] + ", " + plate[i] + "\n";
+        std::string veh_info = "Vehicle: " + car[i] + ", " + color[i] + ", " + plate[i] + "\n";
 
-        string mech_info = "Mechanic: " + name[mech_index] + ", " + gender[mech_index] + "\n";
+        std::string mech_info = "Mechanic: " + name[mech_index] + ", " + gender[mech_index] + "\n";
 
-        string report = "Actual problem: " + pname[pro_index - 1] + "\nDiagnosed problem: " + dia_prob + "\nFix applied: " + fix_apply + "\nFix achievement: " + fix_achieve + "\n";
+        std::string report = "Actual problem: " + pname[pro_index - 1] + "\nDiagnosed problem: " + dia_prob + "\nFix applied: " + fix_apply + "\nFix achievement: " + fix_achieve + "\n";
 
-        string split = "******************************************************\n";
+        std::string split = "******************************************************\n";
 
-        string whole_info = veh_info + mech_info + report + split;
+        std::string whole_info = veh_info + mech_info + report + split;
 
         summary << whole_info;
     }
-    cout << "   Repair finish!" << endl;
-    cout << "******************************************************" << endl;
+    std::cout << "   Repair finish!" << std::endl;
+    std::cout << "******************************************************" << std::endl;
 
-    string file_name5 = argv[6];
+    std::string file_name5 = argv[6];
+
+    // write the repair report to output-file
     Write(summary, file_name5);
 }
