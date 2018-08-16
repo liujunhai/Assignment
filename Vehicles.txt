@@ -1,7 +1,0 @@
-Car,Red,ZX342DC,1.
-Car,Blue,WF312AL,3.
-Bus,White,AP116DL,1.
-Motorbike,Green,DE321AX,2.
-Truck,Black,MO345CP,5.
-Truck,Black,00345CP,5.
-Truck,Black,MMM45CP,5.

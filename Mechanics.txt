@@ -1,7 +1,0 @@
-Boris Barn-Owl,M,77.
-Ernie Edwards,M,60.
-Frankie Fisher,M,75.
-Geraldine Gardner,F,73.
-Henrietta Helpful,F,80.
-          Helpful,F,80.
-Henrietta Helpful,FM,80.

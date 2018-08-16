@@ -1,7 +1,0 @@
-Out of petrol,30,10,4.
-Flat tire,20,20,1.
-Steering wheel missing,5,20,2.
-Broken internal component,80,70,6.
-Broken external component,50,50,6.
-Flat battery,15,30,3.
-Worn brakes,30,30,5.
