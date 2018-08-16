@@ -467,7 +467,7 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
         }else
         {
             // compute the potential failure rate of treatment for this mechanic
-            double tt = quality[mech_index] * 0.01 * 0.6 + (1- tcomp[pro_index - 1] * 0.01) * 0.4 * 0.25;
+            double tt = (quality[mech_index] * 0.01 * 0.6 + (1- tcomp[pro_index - 1] * 0.01) * 0.4) * 0.25;
 
             // randomly generate the success rate of treatment for this mechanic
             double tp = (rand()%100) * 0.01;
