@@ -44,7 +44,7 @@ int ReadVehicles(vector<string> &col11, vector<string> &col12, vector<string> &c
 
     if(file.is_open()) // check file open or not.
     {
-        int i = 0;
+        int i = 0; // count lines
         // get each line from txt file.
         while(getline(file, line))
         {
@@ -117,7 +117,7 @@ int ReadMechanics(vector<string> &col21, vector<string> &col22, vector<int> &col
     int temp3;
     if(file.is_open()) // check file open or not.
     {
-        int i = 0;
+        int i = 0;  // count lines
         // get each line from txt file.
         while(getline(file, line))
         {
