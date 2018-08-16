@@ -32,6 +32,9 @@ bool GenerDiaRate(vector<int> quality, vector<int> dcomp, int pro_index, int mec
 bool GenerTreRate(vector<int> quality, vector<int> tcomp, int pro_index, int mech_index);
 
 // 9. diagnose and fixing
-void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<string> ttmt, vector<int> tindex, int pro_index, int mech_index, bool diagnosis, bool treatment);
+void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<string> ttmt, vector<int> tindex, int pro_index, int mech_index, bool diagnosis, bool treatment, string &dia_prob, string &fix_apply, string &fix_achieve);
+
+// 10. writing Function
+int Write(std::ostringstream &summary, string filename5);
 
 #endif

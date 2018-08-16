@@ -1,0 +1,35 @@
+Vehicle: Car, Red, ZX342DC
+Mechanic: Ernie Edwards, M
+Actual problem: Out of petrol
+Diagnosed problem: Out of petrol
+Fix applied: Add petrol.
+Fix_achievement: Fail
+******************************************************
+Vehicle: Car, Blue, WF312AL
+Mechanic: Ernie Edwards, M
+Actual problem: Steering wheel missing
+Diagnosed problem: Steering wheel missing
+Fix applied: Add a steering wheel.
+Fix_achievement: Fail
+******************************************************
+Vehicle: Bus, White, AP116DL
+Mechanic: Ernie Edwards, M
+Actual problem: Out of petrol
+Diagnosed problem: Out of petrol
+Fix applied: Add petrol.
+Fix_achievement: Successful
+******************************************************
+Vehicle: Motorbike, Green, DE321AX
+Mechanic: Geraldine Gardner, F
+Actual problem: Flat tire
+Diagnosed problem: Flat tire
+Fix applied: Replace tire.
+Fix_achievement: Fail
+******************************************************
+Vehicle: Truck, Black, MO345CP
+Mechanic: Geraldine Gardner, F
+Actual problem: Broken external component
+Diagnosed problem: Broken external component
+Fix applied: Replace component.
+Fix_achievement: Fail
+******************************************************

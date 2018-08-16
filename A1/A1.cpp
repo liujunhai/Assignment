@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <algorithm>
 #include <cctype>
+#include <sstream>
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -38,12 +39,14 @@ int main(int argc, char* argv[])
     string file_name4 = argv[5];
     ReadFixes(ttmt, file_name4); // retrieve fix method from Fixes.txt
 /* **************** Diagnose and treatment procedure *************/
+    ostringstream summary; // A string stream to contain the whole summary
 
     string number = argv[1];
     int inumber = stoi(number);
     int num_mech = name.size(); // get the total number of mechanics
     if(inumber >= car.size())
         inumber = car.size();
+
     for(int i = 0; i < inumber; i++) // the whole procedure
     {
         int mech_index = rand()%num_mech; // generate a random index in the range of 0-(num_mech - 1)
@@ -51,15 +54,42 @@ int main(int argc, char* argv[])
         int pro_index = problem[i]; // get the index of the current vehicle to index Problems.txt
 
         cout << "   The current mechanic is: [" << name[mech_index] << ", " << gender[mech_index] << "] and the " << i + 1<< ".vehicle is coming in now." <<endl;
+
+        // strings contain mechanics' information
+        string mech = name[mech_index];
+        string gen = gender[mech_index];
+
         cout << "   The vehicle is: [" << car[i] << ", " << color[i] << ", " << plate[i] << "]. Start to diagnose. Please wait..." << endl;
+
+        // string contains actual problem
+        string actual_prob = pname[pro_index - 1];
+
         // generate the result of diagnosing(true = Successful detect/ flase = fail detect)
         bool diagnosis = GenerDiaRate(quality, dcomp, pro_index, mech_index);
 
         // generate the result of treatment(true = Successful fix/ flase = fail fix)
         bool treatment = GenerTreRate(quality, tcomp, pro_index, mech_index);
 
-        dandf(quality, tcomp, pname, ttmt, tindex, pro_index, mech_index, diagnosis, treatment);
+        string dia_prob, fix_apply, fix_achieve; // strings contain diagnose and fix information
+
+        dandf(quality, tcomp, pname, ttmt, tindex, pro_index, mech_index, diagnosis, treatment, dia_prob, fix_apply, fix_achieve);
+
+        // Writing into string streams
+        string veh_info = "Vehicle: " + car[i] + ", " + color[i] + ", " + plate[i] + "\n";
+
+        string mech_info = "Mechanic: " + name[mech_index] + ", " + gender[mech_index] + "\n";
+
+        string report = "Actual problem: " + pname[pro_index - 1] + "\nDiagnosed problem: " + dia_prob + "\nFix applied: " + fix_apply + "\nFix_achievement: " + fix_achieve + "\n";
+
+        string split = "******************************************************\n";
+
+        string whole_info = veh_info + mech_info + report + split;
+
+        summary << whole_info;
     }
     cout << "   Repair finish!" << endl;
+    cout << "******************************************************" << endl;
 
+    string file_name5 = argv[6];
+    Write(summary, file_name5);
 }

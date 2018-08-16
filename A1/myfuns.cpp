@@ -8,13 +8,14 @@
 #include <stdio.h>
 #include <cctype>
 #include "myfuns.h"
+#include <sstream>
 using namespace std;
 
 // 1. read from Vehicles.txt file.
 int ReadVehicles(vector<string> &col11, vector<string> &col12, vector<string> &col13, vector<int> &col14, string filename1, bool (*CheckP)(string temp3))
 {
-    cout << "1. Start tp read Vehicles.txt. Please wait." << endl;
-    cout << "=====================================================>" << endl;
+    cout << "1. Start to read Vehicles.txt. Please wait." << endl;
+    cout << "   ==================================================>" << endl;
     string line; // declare string line to temporary contain lines.
 
     ifstream file;
@@ -89,7 +90,7 @@ int ReadVehicles(vector<string> &col11, vector<string> &col12, vector<string> &c
 int ReadMechanics(vector<string> &col21, vector<string> &col22, vector<int> &col23, string filename2, bool (*CheckM)(string name, string gender, int quality))
 {
     cout << "2. Start to read Mechanics.txt. Please wait." << endl;
-    cout << "=====================================================>" << endl;
+    cout << "   ==================================================>" << endl;
     string line; // declare string line to temporary contain lines.
 
     ifstream file;
@@ -156,7 +157,7 @@ int ReadMechanics(vector<string> &col21, vector<string> &col22, vector<int> &col
 int ReadProblems(vector<string> &col31, vector<int> &col32, vector<int> &col33, vector<int> &col34, string filename3)
 {
     cout << "3. Start to read Problems.txt. Please wait." << endl;
-    cout << "=====================================================>" << endl;
+    cout << "   ==================================================>" << endl;
     string line; // declare string line to temporary contain lines.
 
     ifstream file;
@@ -218,7 +219,7 @@ int ReadProblems(vector<string> &col31, vector<int> &col32, vector<int> &col33, 
 int ReadFixes(vector<string> &col41, string filename4)
 {
     cout << "4. Start to read Fixes.txt. Please wait." << endl;
-    cout << "=====================================================>" << endl;
+    cout << "   ==================================================>" << endl;
     string line;
 
     ifstream file;
@@ -347,10 +348,10 @@ bool GenerDiaRate(vector<int> quality, vector<int> dcomp, int pro_index, int mec
 {
     // compute the potential failure rate of diagnosing for this mechanic
     double df = quality[mech_index] * 0.01 * 0.7 +  (1 - dcomp[pro_index - 1] * 0.01) * 0.3;
-    cout << "df: " << df << endl;
+
     // randomly generate the success rate of diagnosing for this mechanic
     double dp = (rand()%100) * 0.01;
-    cout << "dp: " << dp << endl;
+
     // make evaluation
     if(dp <= df)
     {
@@ -369,10 +370,10 @@ bool GenerTreRate(vector<int> quality, vector<int> tcomp, int pro_index, int mec
 {
     // compute the potential failure rate of treatment for this mechanic
     double tf = quality[mech_index] * 0.01 * 0.6 + (1 - tcomp[pro_index - 1] * 0.01) * 0.4;
-    cout << "tf: " << tf << endl;
+
     // randomly generate the success rate of treatment for this mechanic
     double tp = (rand()%100) * 0.01;
-cout << "tp: " << tp << endl;
+
     if(tp <= tf)
     {
         bool result = true;
@@ -393,25 +394,25 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
         int tre_index = tindex[pro_index - 1];
         cout << "1) Successful diagnose √, the problem is: [" << pname[pro_index - 1] << "]" << endl;
 
-        dia_prob = ", diagnosed problem: " + pname[pro_index - 1];
+        dia_prob = pname[pro_index - 1];
 
         cout << "   The corresponding treatment method is: [" << ttmt[tre_index - 1] << "]" << endl;
 
-        fix_apply = ", fix applied: " + ttmt[tre_index - 1];
+        fix_apply = ttmt[tre_index - 1];
 
         cout << "   Now fixing. Please wait........." << endl;
-        cout << "=====================================================>" << endl;
+        cout << "   ==================================================>" << endl;
         // if dianosis = True and Treatment = true
         if(treatment == true)
         {
-            fix_achieve = ", fix achievement: successful." ;
+            fix_achieve = "Successful" ;
 
             cout << "2) Repair complete √, you can retrieve your car." << endl;
             cout << "   Moving to the next car, and restart the whole process." << endl;
             cout << "******************************************************" << endl;
         }else
         {
-            fix_achieve = ", fix achievement: fail.";
+            fix_achieve = "Fail";
 
             cout << "2) Repair fail X, you need to retrieve your car." << endl;
             cout << "   Moving to the next car, and restart the whole process." << endl;
@@ -420,37 +421,37 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
     }else
     {
         cout << "1) Dignose fail X, start guessing the possible problem." << endl;
-        cout << "=====================================================>" << endl;
+        cout << "   ==================================================>" << endl;
 
         int num_pro = pname.size(); // generate the length of problem list
         int fpro_index = rand()%num_pro; // generate a random number in the range of 0-num_pro
 
         cout << "   The problem may be: [" << pname[fpro_index - 1] << "]" << endl;
 
-        dia_prob = ", diagnosed problem: " + pname[fpro_index - 1];
+        dia_prob = pname[fpro_index - 1];
 
         int ftre_index = tindex[fpro_index - 1];
         cout << "   The corresponding treatment method is: [" << ttmt[ftre_index - 1] << "]" <<endl;
 
-        fix_apply = ", fix applied: " + ttmt[ftre_index - 1];
+        fix_apply = ttmt[ftre_index - 1];
 
         cout << "   Now fixing. Please wait.........." << endl;
-        cout << "=====================================================>" << endl;
+        cout << "   ==================================================>" << endl;
 
         if(pname[fpro_index - 1] == pname[pro_index - 1])
         {
             cout << "   Maybe the guess is correct, the problem can be fixed quickly." << endl;
             // compute the potential failure rate of treatment for this mechanic (right guessing)
             double tt = quality[mech_index] * 0.01 * 0.6 + (1- tcomp[pro_index - 1] * 0.01) * 0.4;
-            cout << "tt: " << tt << endl;
+
             // randomly generate the success rate of treatment for this mechanic
             double tp = (rand()%100) * 0.01;
-            cout << "tp: " << tp << endl;
+
             if(tp <= tt)
             {
                 cout << "2) Repair complete √, you can retrieve your car." << endl;
 
-                fix_achieve = ", fix achievement: successful.";
+                fix_achieve = "Successful";
 
                 cout << "   Moving to the next car, and restart the whole process." << endl;
                 cout << "******************************************************" << endl;
@@ -458,7 +459,7 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
             {
                 cout << "2) Repair fail X, you need to retrieve your car." << endl;
 
-                fix_achieve = ", fix achievement: fail.";
+                fix_achieve = "Fail";
 
                 cout << "   Moving to the next car, and restart the whole process." << endl;
                 cout << "******************************************************" << endl;
@@ -467,15 +468,15 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
         {
             // compute the potential failure rate of treatment for this mechanic
             double tt = quality[mech_index] * 0.01 * 0.6 + (1- tcomp[pro_index - 1] * 0.01) * 0.4 * 0.25;
-            cout << "tt: " << tt << endl;
+
             // randomly generate the success rate of treatment for this mechanic
             double tp = (rand()%100) * 0.01;
-            cout << "tp: " << tp << endl;
+
             if(tp <= tt)
             {
                 cout << "2) Repair complete √, you can retrieve your car." << endl;
 
-                fix_achieve = ", fix achievement: successful.";
+                fix_achieve = "Successful";
 
                 cout << "   Moving to the next car, and restart the whole process." << endl;
                 cout << "******************************************************" << endl;
@@ -483,11 +484,38 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
             {
                 cout << "2) Repair fail X, you need to retrieve your car." << endl;
 
-                fix_achieve = ", fix achievement: fail.";
+                fix_achieve = "Fail";
 
                 cout << "   Moving to the next car, and restart the whole process." << endl;
                 cout << "******************************************************" << endl;
             }
         }
     }
+}
+
+// 10. writing Function
+int Write(ostringstream &summary, string filename5)
+{
+    fstream output;
+    output.open(filename5, fstream::out);
+    cout << "   Start to generate repair report. Please wait." << endl;
+    cout << "   ==================================================>" << endl;
+    // error recovery.
+    if(output.fail())
+    {
+        cerr << "invalid characters! Report did not generate." << endl;
+        return -1;
+    }
+    if(output.bad())
+    {
+        cerr << "hardware failure! Report did not generate." << endl;
+        return -2;
+    }
+    if(output.is_open())
+    {
+        output << summary.str();
+        cout << "   Repair report has been written to " << filename5 << " successfully." << endl;
+    }
+    output.close();
+    return 0;
 }
