@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 
         string mech_info = "Mechanic: " + name[mech_index] + ", " + gender[mech_index] + "\n";
 
-        string report = "Actual problem: " + pname[pro_index - 1] + "\nDiagnosed problem: " + dia_prob + "\nFix applied: " + fix_apply + "\nFix_achievement: " + fix_achieve + "\n";
+        string report = "Actual problem: " + pname[pro_index - 1] + "\nDiagnosed problem: " + dia_prob + "\nFix applied: " + fix_apply + "\nFix achievement: " + fix_achieve + "\n";
 
         string split = "******************************************************\n";
 
