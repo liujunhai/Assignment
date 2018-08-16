@@ -386,23 +386,33 @@ cout << "tp: " << tp << endl;
 }
 
 // 9. diagnose and fixing
-void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<string> ttmt, vector<int> tindex, int pro_index, int mech_index, bool diagnosis, bool treatment)
+void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<string> ttmt, vector<int> tindex, int pro_index, int mech_index, bool diagnosis, bool treatment, string &dia_prob, string &fix_apply, string &fix_achieve)
 {
     if(diagnosis == true)
     {
         int tre_index = tindex[pro_index - 1];
         cout << "1) Successful diagnose √, the problem is: [" << pname[pro_index - 1] << "]" << endl;
+
+        dia_prob = ", diagnosed problem: " + pname[pro_index - 1];
+
         cout << "   The corresponding treatment method is: [" << ttmt[tre_index - 1] << "]" << endl;
+
+        fix_apply = ", fix applied: " + ttmt[tre_index - 1];
+
         cout << "   Now fixing. Please wait........." << endl;
         cout << "=====================================================>" << endl;
         // if dianosis = True and Treatment = true
         if(treatment == true)
         {
+            fix_achieve = ", fix achievement: successful." ;
+
             cout << "2) Repair complete √, you can retrieve your car." << endl;
             cout << "   Moving to the next car, and restart the whole process." << endl;
             cout << "******************************************************" << endl;
         }else
         {
+            fix_achieve = ", fix achievement: fail.";
+
             cout << "2) Repair fail X, you need to retrieve your car." << endl;
             cout << "   Moving to the next car, and restart the whole process." << endl;
             cout << "******************************************************" << endl;
@@ -416,8 +426,14 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
         int fpro_index = rand()%num_pro; // generate a random number in the range of 0-num_pro
 
         cout << "   The problem may be: [" << pname[fpro_index - 1] << "]" << endl;
+
+        dia_prob = ", diagnosed problem: " + pname[fpro_index - 1];
+
         int ftre_index = tindex[fpro_index - 1];
         cout << "   The corresponding treatment method is: [" << ttmt[ftre_index - 1] << "]" <<endl;
+
+        fix_apply = ", fix applied: " + ttmt[ftre_index - 1];
+
         cout << "   Now fixing. Please wait.........." << endl;
         cout << "=====================================================>" << endl;
 
@@ -433,11 +449,17 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
             if(tp <= tt)
             {
                 cout << "2) Repair complete √, you can retrieve your car." << endl;
+
+                fix_achieve = ", fix achievement: successful.";
+
                 cout << "   Moving to the next car, and restart the whole process." << endl;
                 cout << "******************************************************" << endl;
             }else
             {
                 cout << "2) Repair fail X, you need to retrieve your car." << endl;
+
+                fix_achieve = ", fix achievement: fail.";
+
                 cout << "   Moving to the next car, and restart the whole process." << endl;
                 cout << "******************************************************" << endl;
             }
@@ -452,11 +474,17 @@ void dandf(vector<int> quality, vector<int> tcomp, vector<string> pname, vector<
             if(tp <= tt)
             {
                 cout << "2) Repair complete √, you can retrieve your car." << endl;
+
+                fix_achieve = ", fix achievement: successful.";
+
                 cout << "   Moving to the next car, and restart the whole process." << endl;
                 cout << "******************************************************" << endl;
             }else
             {
                 cout << "2) Repair fail X, you need to retrieve your car." << endl;
+
+                fix_achieve = ", fix achievement: fail.";
+
                 cout << "   Moving to the next car, and restart the whole process." << endl;
                 cout << "******************************************************" << endl;
             }
