@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 
         int pro_index = problem[i]; // get the index of the current vehicle to index Problems.txt
 
-        std::cout << "   The current mechanic is: [" << name[mech_index] << ", " << gender[mech_index] << "] and the " << i + 1<< ".vehicle is coming in now." <<std::endl;
+        std::cout << i + 1 << ". The current mechanic is: [" << name[mech_index] << ", " << gender[mech_index] << "]" <<std::endl;
 
         // strings contain mechanics' information
         std::string mech = name[mech_index];

@@ -423,14 +423,14 @@ void dandf(std::vector<int> quality, std::vector<int> tcomp, std::vector<std::st
         std::cout << "1) Dignose failed X, start guessing the possible problem." << std::endl;
         std::cout << "   ==================================================>" << std::endl;
 
-        int num_pro = pname.size(); // generate the length of problem list
+        int num_pro = static_cast<int>(pname.size()); // generate the length of problem list
         int fpro_index = rand()%num_pro; // generate a random number in the range of 0-num_pro
 
-        std::cout << "   The problem may be: [" << pname[fpro_index - 1] << "]" << std::endl;
+        std::cout << "   The problem may be: [" << pname[fpro_index] << "]" << std::endl;
 
-        dia_prob = pname[fpro_index - 1];
+        dia_prob = pname[fpro_index];
 
-        int ftre_index = tindex[fpro_index - 1];
+        int ftre_index = tindex[fpro_index];
         std::cout << "   The corresponding treatment method is: [" << ttmt[ftre_index - 1] << "]" <<std::endl;
 
         fix_apply = ttmt[ftre_index - 1];
@@ -438,7 +438,7 @@ void dandf(std::vector<int> quality, std::vector<int> tcomp, std::vector<std::st
         std::cout << "   Now fixing. Please wait.........." << std::endl;
         std::cout << "   ==================================================>" << std::endl;
 
-        if(pname[fpro_index - 1] == pname[pro_index - 1])
+        if(pname[fpro_index] == pname[pro_index - 1])
         {
             std::cout << "   Maybe the guess is correct, the problem can be fixed quickly." << std::endl;
             // compute the potential failure rate of treatment for this mechanic (right guessing)
