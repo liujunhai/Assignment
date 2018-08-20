@@ -350,7 +350,7 @@ bool GenerDiaRate(std::vector<int> quality, std::vector<int> dcomp, int pro_inde
     double df = quality[mech_index] * 0.01 * 0.7 +  (1 - dcomp[pro_index - 1] * 0.01) * 0.3;
 
     // randomly generate the success rate of diagnosing for this mechanic
-    double dp = (rand()%100) * 0.01;
+    double dp = (rand()%101) * 0.01;
 
     // make evaluation
     if(dp <= df)
@@ -372,7 +372,7 @@ bool GenerTreRate(std::vector<int> quality, std::vector<int> tcomp, int pro_inde
     double tf = quality[mech_index] * 0.01 * 0.6 + (1 - tcomp[pro_index - 1] * 0.01) * 0.4;
 
     // randomly generate the success rate of treatment for this mechanic
-    double tp = (rand()%100) * 0.01;
+    double tp = (rand()%101) * 0.01;
 
     if(tp <= tf)
     {
@@ -438,14 +438,14 @@ void dandf(std::vector<int> quality, std::vector<int> tcomp, std::vector<std::st
         std::cout << "   Now fixing. Please wait.........." << std::endl;
         std::cout << "   ==================================================>" << std::endl;
 
-        if(pname[fpro_index] == pname[pro_index - 1])
+        if(pname[fpro_index] == pname[pro_index - 1]) // correct guess
         {
             std::cout << "   Maybe the guess is correct, the problem can be fixed quickly." << std::endl;
             // compute the potential failure rate of treatment for this mechanic (right guessing)
             double tt = quality[mech_index] * 0.01 * 0.6 + (1- tcomp[pro_index - 1] * 0.01) * 0.4;
 
             // randomly generate the success rate of treatment for this mechanic
-            double tp = (rand()%100) * 0.01;
+            double tp = (rand()%101) * 0.01;
 
             if(tp <= tt)
             {
@@ -464,13 +464,13 @@ void dandf(std::vector<int> quality, std::vector<int> tcomp, std::vector<std::st
                 std::cout << "   Moving to the next car, and restart the whole process." << std::endl;
                 std::cout << "******************************************************" << std::endl;
             }
-        }else
+        }else // wrong guess
         {
             // compute the potential failure rate of treatment for this mechanic
-            double tt = (quality[mech_index] * 0.01 * 0.6 + (1- tcomp[pro_index - 1] * 0.01) * 0.4) * 0.25;
+            double tt = (quality[mech_index] * 0.01 * 0.6 + (1- tcomp[fpro_index] * 0.01) * 0.4) * 0.25;
 
             // randomly generate the success rate of treatment for this mechanic
-            double tp = (rand()%100) * 0.01;
+            double tp = (rand()%101) * 0.01;
 
             if(tp <= tt)
             {
