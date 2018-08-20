@@ -43,9 +43,12 @@ int main(int argc, char* argv[])
 
     std::string number = argv[1];
     int inumber = std::stoi(number);
-    int num_mech = name.size(); // get the total number of mechanics
-    if(inumber >= car.size())
-        inumber = car.size();
+    int num_mech = static_cast<int>(name.size()); // get the total number of mechanics
+    if(inumber >= static_cast<int>(car.size())){
+        std::cout << "The input number is greater than the number of vehicles, so the program will end after all the vehicles have been processed." << std::endl;
+        std::cout << " " << std::endl;
+        inumber = static_cast<int>(car.size());
+    }
 
     for(int i = 0; i < inumber; i++) // the whole procedure
     {
@@ -88,7 +91,7 @@ int main(int argc, char* argv[])
 
         summary << whole_info;
     }
-    std::cout << "   Repair finish!" << std::endl;
+    std::cout << "   All vehicles have been processed. Repair finish!" << std::endl;
     std::cout << "******************************************************" << std::endl;
 
     std::string file_name5 = argv[6];
