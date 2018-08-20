@@ -50,32 +50,29 @@ int ReadVehicles(std::vector<std::string> &col11, std::vector<std::string> &col1
         {
             ++i;
             int index = line.find_first_of(','); // find the first comma in each line.
-            temp1 = line.substr(0, index); // put the first element into
-                                                   // the first column.
-
+            temp1 = line.substr(0, index); // hold the first element of that row
             temp = line.substr(index+1); // contain the rest of string(after the first comma)
 
             index = temp.find_first_of(','); // find the second comma in each line.
-            temp2 = temp.substr(0, index); // put the second element into
-                                                   // the second column.
-
+            temp2 = temp.substr(0, index); // hold the second element of that row
             temp = temp.substr(index+1); // contain the rest of string(after the sencond comma)
 
             index = temp.find_first_of(','); // find the third comma in each line.
-            temp3 = temp.substr(0, index); // put the third element into
-                                                   // the third column.
-
+            temp3 = temp.substr(0, index); // hold the third element of that row
             temp = temp.substr(index+1); // contain the rest of string(after the third comma)
-            index = temp.find_first_of('.');       // put the last element into
-            temp4 = std::stoi(temp.substr(0, index)); // the last column.
+
+            index = temp.find_first_of('.'); // hold the last element of that row.
+            temp4 = std::stoi(temp.substr(0, index));
+
             if(CheckP(temp3) == true)
             {   col11.push_back(temp1);
                 col12.push_back(temp2);
                 col13.push_back(temp3);
                 col14.push_back(temp4);
+                std::cout << "   " << temp1 << " " << temp2 << " " << temp3 << " " << temp4 << std::endl;
             }else
             {
-                std::cout << "   Wrong plate format! Line " << i << ". has been ignored!" << std::endl;
+                std::cerr << "   Wrong plate format! Line " << i << ". has been ignored!" << std::endl;
                 continue;
             }
         }
@@ -123,26 +120,24 @@ int ReadMechanics(std::vector<std::string> &col21, std::vector<std::string> &col
         {
             ++i;
             int index = line.find_first_of(','); // find the first comma in each line.
-            temp1 = line.substr(0, index); // put the first element into
-                                                   // the first column.
-
+            temp1 = line.substr(0, index); // hold the first element of that row
             temp = line.substr(index+1); // contain the rest of string(after the first comma)
 
             index = temp.find_first_of(','); // find the second comma in each line.
-            temp2 = temp.substr(0, index); // put the second element into
-                                                   // the second column.
-
+            temp2 = temp.substr(0, index); // hold the second element of that row
             temp = temp.substr(index+1); // contain the rest of string(after the second comma)
-            index = temp.find_first_of('.');       // put the last element into
-            temp3 = std::stoi(temp.substr(0, index)); // the last column.
+
+            index = temp.find_first_of('.');       // hold the last element of that row
+            temp3 = std::stoi(temp.substr(0, index));
 
             if(CheckM(temp1, temp2, temp3) == true)
             {   col21.push_back(temp1);
                 col22.push_back(temp2);
                 col23.push_back(temp3);
+                std::cout << "   " << temp1 << " " << temp2 << " " << temp3 << " " << std::endl;
             }else
             {
-                std::cout << " Line " << i << ". has been ignored!" << std::endl;
+                std::cerr << " Line " << i << ". has been ignored!" << std::endl;
                 continue;
             }
         }
@@ -180,33 +175,33 @@ int ReadProblems(std::vector<std::string> &col31, std::vector<int> &col32, std::
         return -3;
     }
 
-    std::string temp; // use temp to cotain the rest string after ','.
-
+    std::string temp, temp1; // use temp to cotain the rest string after ','.
+    int temp2, temp3, temp4;
     if(file.is_open()) // check file open or not.
     {
         // get each line from txt file.
         while(std::getline(file, line))
         {
             int index = line.find_first_of(','); // find the first comma in each line.
-            col31.push_back(line.substr(0, index)); // put the first element into
-                                                   // the first column.
-
+            temp1 = line.substr(0, index); // hold the first element of that row
             temp = line.substr(index+1); // contain the rest of string(after the first comma)
 
             index = temp.find_first_of(','); // find the second comma in each line.
-            col32.push_back(stoi(temp.substr(0, index))); // put the second element into
-                                                   // the second column.
-
+            temp2 = stoi(temp.substr(0, index)); // hold the second element of that row
             temp = temp.substr(index+1); // contain the rest of string(after the sencond comma)
 
             index = temp.find_first_of(','); // find the third comma in each line.
-            col33.push_back(stoi(temp.substr(0, index))); // put the third element into
-                                                   // the third column.
-
+            temp3 = stoi(temp.substr(0, index)); // hold the third element of that row
             temp = temp.substr(index+1); // contain the rest of string(after the third comma)
-            index = temp.find_first_of('.');       // put the last element into
-            col34.push_back(stoi(temp.substr(0, index))); // the last column.
 
+            index = temp.find_first_of('.');       // hold the last element of that row
+            temp4 = stoi(temp.substr(0, index));
+
+            col31.push_back(temp1);
+            col32.push_back(temp2);
+            col33.push_back(temp3);
+            col34.push_back(temp4);
+            std::cout << "   " << temp1 << " " << temp2 << " " << temp3 << " " << temp4 << std::endl;
         }
         file.close(); // close file.
     }
@@ -248,6 +243,7 @@ int ReadFixes(std::vector<std::string> &col41, std::string filename4)
         while(std::getline(file, line))
         {
             col41.push_back(line);
+            std::cout << "   " << line << std::endl;
         }
         file.close(); // close file.
     }
@@ -272,17 +268,17 @@ bool CheckM(std::string name, std::string gender, int quality)
     }
     if(ci > 1)
     {
-        std::cout << "   The name cannot be empty!";
+        std::cerr << "   The name cannot be empty!";
         return false;
     }
     if(gender.size() != 1)
     {
-        std::cout << "   Gender can only be 1 character!";
+        std::cerr << "   Gender can only be 1 character!";
         return false;
     }
     if(quality/100 > 1 | quality/100 < 0)
     {
-        std::cout << "   Quality need to be within 0-100!";
+        std::cerr << "   Quality need to be within 0-100!";
         return false;
     }else
     return true;

@@ -45,7 +45,8 @@ int main(int argc, char* argv[])
     int inumber = std::stoi(number);
     int num_mech = static_cast<int>(name.size()); // get the total number of mechanics
     if(inumber >= static_cast<int>(car.size())){
-        std::cout << "The input number is greater than the number of vehicles, so the program will end after all the vehicles have been processed." << std::endl;
+        std::cerr << "   The input number is greater than the number of vehicles" << std::endl;
+        std::cerr << "   so the program will be ended after all the vehicles have been processed." << std::endl;
         std::cout << " " << std::endl;
         inumber = static_cast<int>(car.size());
     }
